@@ -8,6 +8,7 @@ This operator utilizes a custom resource named `DepScaler` to specify the scalin
 
 ### Prerequisites
 1. Go (version 1.20 or higher)
+2. A Running Kubernetes Cluster
    
 ## Installation
 
