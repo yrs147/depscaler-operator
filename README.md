@@ -7,10 +7,51 @@ The Deployment Scaler Operator is a Kubernetes controller designed to dynamicall
 This operator utilizes a custom resource named `DepScaler` to specify the scaling schedule for one or more deployments. It continuously monitors the current time and scales the specified deployments to the desired number of replicas if the current time falls within the specified time period (in hours).
 
 ### Prerequisites
-1. Go (version 1.20 or higher)
+1. Go version 1.20 (only required if running locally)
 2. A Running Kubernetes Cluster
+
+### Running on the cluster
+
+
+1. Build and push your image to the location specified by `IMG`:
+
+```sh
+make docker-build docker-push IMG=<some-registry>/depscaler:tag
+```
+
+2. Deploy the controller to the cluster with the image specified by `IMG`:
+
+```sh
+make deploy IMG=<some-registry>/depscaler:tag
+```
+
+3. Create a sample deployment 
+
+```bash
+kubectl create deployment nginx --image=nginx
+```
+
+4. Install Instances of Custom Resources:
+
+```sh
+kubectl apply -f config/samples/
+```
+
+### Uninstall CRDs
+To delete the CRDs from the cluster:
+
+```sh
+make uninstall
+```
+
+### Undeploy controller
+UnDeploy the controller from the cluster:
+
+```sh
+make undeploy
+```
    
-## Installation
+## Running Locally against Cluster
 
 1. Clone the repository:
 
@@ -24,12 +65,8 @@ This operator utilizes a custom resource named `DepScaler` to specify the scalin
     ```bash
     make install
     ```
-3. Verify if the `crd` is created
-    ```bash
-    kubectl get crd
-    ```
 
-4. Create a sample deployment 
+3. Create a sample deployment 
 
     ```bash
     kubectl create deployment nginx --image=nginx
@@ -57,7 +94,8 @@ This operator utilizes a custom resource named `DepScaler` to specify the scalin
           namespace: default
     ```
 
-7. And see the operator in action 
+### ScreenShots 
+Operator in action 
 
  ![image](https://github.com/yrs147/depscaler-operator/assets/98258627/09e76a91-95af-4ca3-b9cc-72e8bbfed116)
 
