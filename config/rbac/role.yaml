@@ -1,0 +1,32 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - depscale.yrs.scaler
+  resources:
+  - depscalers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - depscale.yrs.scaler
+  resources:
+  - depscalers/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - depscale.yrs.scaler
+  resources:
+  - depscalers/status
+  verbs:
+  - get
+  - patch
+  - update

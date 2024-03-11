@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- depscale_v1_depscaler.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

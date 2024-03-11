@@ -1,0 +1,29 @@
+apiVersion: depscale.yrs.scaler/v1
+kind: DepScaler
+metadata:
+  labels:
+  name: depscaler-sample
+spec:
+  begin: 7
+  end: 8
+  replicas: 6
+  deployments:
+    - name: nginx
+      namespace: default
+
+---
+
+apiVersion: depscale.yrs.scaler/v1
+kind: DepScaler
+metadata:
+  labels:
+  name: depscaler-sample2
+spec:
+  begin: 8
+  end: 10
+  replicas: 2
+  deployments:
+    - name: nginx
+      namespace: default
+
+
