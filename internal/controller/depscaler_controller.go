@@ -24,7 +24,9 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/event"
 	"sigs.k8s.io/controller-runtime/pkg/log"
+	"sigs.k8s.io/controller-runtime/pkg/predicate"
 
 	depscalev1 "github.com/yrs147/test-operator/api/v1"
 )
@@ -97,5 +99,19 @@ func (r *DepScalerReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 func (r *DepScalerReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&depscalev1.DepScaler{}).
+		WithEventFilter(predicate.Funcs{
+			CreateFunc: func(e event.CreateEvent) bool {
+				log.Log.WithValues("Namespace", e.Object.GetNamespace(), "Name", e.Object.GetName()).Info("DepScaler created")
+				return true
+			},
+			UpdateFunc: func(e event.UpdateEvent) bool {
+				log.Log.WithValues("Namespace", e.ObjectNew.GetNamespace(), "Name", e.ObjectNew.GetName()).Info("DepScaler updated")
+				return true
+			},
+			DeleteFunc: func(e event.DeleteEvent) bool {
+				log.Log.WithValues("Namespace", e.Object.GetNamespace(), "Name", e.Object.GetName()).Info("DepScaler deleted")
+				return true
+			},
+		}).
 		Complete(r)
 }
