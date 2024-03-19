@@ -94,10 +94,22 @@ make undeploy
           namespace: default
     ```
 
+### Testing the Controller
+Use the `make test` command to run tests
+
+```
+make test
+```
+
+![image](https://github.com/yrs147/depscaler-operator/assets/98258627/baa3850d-ebaf-4259-b3df-842ce3c92101)
+
+
+
 ### ScreenShots 
 Operator in action 
 
- ![image](https://github.com/yrs147/depscaler-operator/assets/98258627/09e76a91-95af-4ca3-b9cc-72e8bbfed116)
+ ![image](https://github.com/yrs147/depscaler-operator/assets/98258627/67ff7d91-aeb2-41ae-a652-0dfc059db142)
+
 
 ![image](https://github.com/yrs147/depscaler-operator/assets/98258627/8f9ed5bf-2d30-480b-ae6e-731ee70d3def)
 
